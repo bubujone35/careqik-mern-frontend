@@ -27,7 +27,7 @@ class Profile extends Component {
       if(data.error) {
         console.log("ERROR")
       } else {
-        console.log(data);
+        this.setState({user: data})
       }
     })
   }
