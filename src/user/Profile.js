@@ -11,7 +11,25 @@ class Profile extends Component {
   }
 
   componentDidMount() {
-    console.log("user id from route params:",  this.props.match.params.userId)
+    const userId = this.props.match.params.userId
+    fetch(`${process.env.REACT_APP_API_URL}/user/${userId}`, {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+        "Content-type": "application/json",
+        Authorization: `Bearer ${isAuthenticated().token}`
+      }
+    })
+    .then(response => {
+      return response.json()
+    })
+    .then(data => {
+      if(data.error) {
+        console.log("ERROR")
+      } else {
+        console.log(data);
+      }
+    })
   }
 
   render() {
